@@ -29,8 +29,8 @@
         {
             AppPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log.txt");
             // sets the appPath field to the path of the log file.
-            string m = "";
-            Log(m);
+            string message = "Application started.";
+            Log(message);
         }
         #endregion
 
@@ -42,7 +42,7 @@
         /// <param name="message">the message to write</param>
         public static void Log(string message)
         {
-            string m = DateTime.Now.ToString() + " : Application started.";
+            string fullMessage = DateTime.Now.ToString() + " : " + message;
 
             StreamWriter file = null;
 
@@ -50,12 +50,52 @@
             {
                 file = new StreamWriter(AppPath, true);
 
-                file.WriteLine(m);
+                file.WriteLine(fullMessage);
             }
-            catch(IOException)
+
+            #region Exceptions
+            catch (DirectoryNotFoundException)
             {
                 throw;
             }
+            catch (PathTooLongException)
+            {
+                throw;
+            }
+            catch (IOException)
+            {
+                throw;
+            }
+            catch (ObjectDisposedException)
+            {
+                throw;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                throw;
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (System.Security.SecurityException)
+            {
+                throw;
+            }
+            catch (SystemException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            #endregion
+
             finally
             {
                 file.Close();
